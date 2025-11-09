@@ -129,20 +129,6 @@ body {
   background-position: center;
   filter: saturate(1.1);
 }
-   .hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.hero h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #ccc;
-  letter-spacing: 0.03em;
-  margin-top: 0.5rem;
-}
 
 .hero-content {
   position: relative;
