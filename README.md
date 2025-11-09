@@ -1,6 +1,6 @@
-# WorkShield – Know Your Rights at Work
+# Open Door Policy - Really Know Your Rights
 
-**WorkShield** is a plain-language, practical guide for employees facing retaliation, discrimination, or harassment — with clear steps for documenting issues and protecting yourself when HR isn’t your friend.
+**Open Door Policy** is a plain-language, practical guide for employees facing retaliation, discrimination, or harassment — with clear steps for documenting issues and protecting yourself when HR isn’t your friend.
 
 This resource covers:
 - Recognizing retaliation, discrimination, and gaslighting tactics at work  
@@ -13,7 +13,7 @@ This resource covers:
 
 ## 🌐 Live Website
 
-👉 **Live site: [https://keiruff.github.io/workshield/](https://keiruff.github.io/workshield/)**
+👉 **Live site: [https://keiruff.github.io/opendoorpolicy/](https://keiruff.github.io/opendoorpolicy/)**
 
 ---
 
