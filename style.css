@@ -409,3 +409,24 @@ body {
     margin: 0 -12px 16px;
   }
 }
+
+/* HR
+   -------------------------------------------------- */
+
+#hr-fails ul {
+  margin-left: 1.2rem;
+  line-height: 1.6;
+}
+
+#hr-fails h3 {
+  color: #111;
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+.callout.warning {
+  background: #fdecea;
+  border-left: 5px solid #c0392b;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
