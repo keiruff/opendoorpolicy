@@ -220,6 +220,18 @@ body {
   margin-bottom: 10px;
 }
 
+/* Text-links
+   -------------------------------------------------- */
+.text-link {
+  color: #1d4ed8;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.text-link:hover {
+  color: #1e3a8a;
+}
+
 /* Buttons
    -------------------------------------------------- */
 
