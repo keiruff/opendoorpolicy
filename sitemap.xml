@@ -1,8 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
   <url>
     <loc>https://opendoorpolicy.org/</loc>
     <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
   </url>
-</urlset>
 
+  <!-- Retaliation Documentation Guide -->
+  <url>
+    <loc>https://opendoorpolicy.org/retaliation-documentation.html</loc>
+    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Red Flags section -->
+  <url>
+    <loc>https://opendoorpolicy.org/#red-flags</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Documentation Toolkit -->
+  <url>
+    <loc>https://opendoorpolicy.org/#document</loc>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Internal Navigation / HR Strategy -->
+  <url>
+    <loc>https://opendoorpolicy.org/#internal</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- External Support -->
+  <url>
+    <loc>https://opendoorpolicy.org/#external</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Templates Section -->
+  <url>
+    <loc>https://opendoorpolicy.org/#templates</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://opendoorpolicy.org/#faq</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- About Page Section -->
+  <url>
+    <loc>https://opendoorpolicy.org/#about</loc>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
