@@ -226,7 +226,7 @@ body {
 
 /* Section dividers */
 .panel {
-  border-top: 3px solid #2563eb22;  /* soft translucent blue */
+  border-top: 3px solid #2563eb55;
   padding-top: 24px;
   margin-top: 32px;
 }
