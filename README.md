@@ -66,12 +66,19 @@ This is not legal advice — it’s a worker-to-worker guide built on research, 
 ## 🧩 Project Structure
 
 index.html # Homepage + navigation
+
 power-seo-documentation.html # Long-form documentation guide
+
 style.css # Global styling
+
 js/script.js # FAQ toggles + copy buttons
+
 favicon.ico # Custom ODP shield icon
+
 sitemap.xml # Search engine sitemap
+
 robots.txt # Crawler directives
+
 Documentation-Log-Template.pdf # (Optional) Downloadable log template
 
 ---
