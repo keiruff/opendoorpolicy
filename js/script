@@ -1,4 +1,4 @@
-// Open Door Policy - Really Know Your Rights
+// Open Door Policy – How to Document HR Retaliation the Right Way
 
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -11,26 +11,44 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
-// Copy log template button
-const copyLogBtn = document.querySelector("[data-copy-log]");
-if (copyLogBtn) {
-  copyLogBtn.addEventListener("click", () => {
-    const template = `
+// -------------------------
+// COPY TEMPLATE TEXT BUTTONS
+// -------------------------
+document.querySelectorAll("[data-copy-template]").forEach(button => {
+  button.addEventListener("click", () => {
+    const templateText = button.closest(".template-card").querySelector(".template-text").innerText;
+
+    navigator.clipboard.writeText(templateText)
+      .then(() => {
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = "Copy", 1500);
+      })
+      .catch(err => console.error("Copy failed:", err));
+  });
+});
+
+// -------------------------
+// COPY LOG TEMPLATE BUTTON
+// -------------------------
+document.querySelector("[data-copy-log]")?.addEventListener("click", () => {
+
+  // Your default log template content:
+  const logTemplate = `
 Date:
 People:
-Event (facts, not feelings):
-Impact on work/health:
-Follow-up (who you told, when, how):`;
-    navigator.clipboard
-      .writeText(template.trim())
-      .then(() => {
-        copyLogBtn.textContent = "Copied!";
-        setTimeout(() => (copyLogBtn.textContent = "Copy log template"), 1500);
-      })
-      .catch(() => {
-        alert("Could not copy. You can still select and copy manually.");
-      });
-  });
+Event:
+Impact:
+Follow-up:
+  `.trim();
+
+  navigator.clipboard.writeText(logTemplate)
+    .then(() => {
+      const logBtn = document.querySelector("[data-copy-log]");
+      logBtn.textContent = "Copied!";
+      setTimeout(() => logBtn.textContent = "Copy log template", 1500);
+    })
+    .catch(err => console.error("Copy failed:", err));
+});
 }
 
 // Copy any template <pre> with data-template
