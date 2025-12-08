@@ -13,7 +13,7 @@ Powered by GitHub.
 
 ---
 
-🔍 **What This Site Covers**
+## 🔍 About the Creator
 
 - How to recognize retaliation, gaslighting, pretext, and shifting expectations
 
