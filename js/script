@@ -56,9 +56,9 @@ function initFaqToggles() {
 // -----------------------------
 // COPY TEMPLATE BUTTONS
 // -----------------------------
-function initTemplateCopyButtons() {
+function copyToClipboard(text) {
   const buttons = document.querySelectorAll("[data-copy-template]");
-  if (!buttons.length) return;
+  if (navigator.clipboard) return navigator.clipboard.writeText(text);
 
   buttons.forEach(button => {
     button.addEventListener("click", () => {
