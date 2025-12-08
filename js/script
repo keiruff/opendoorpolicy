@@ -1,105 +1,136 @@
 // Open Door Policy – How to Document HR Retaliation the Right Way
+// js/script.js
+// =====================================
+// Open Door Policy – small interaction layer
+// - FAQ accordion toggles
+// - Copy-to-clipboard buttons
+// =====================================
 
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (e) => {
-    const targetId = link.getAttribute("href").slice(1);
-    const target = document.getElementById(targetId);
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  initFaqToggles();
+  initTemplateCopyButtons();
+  initLogCopyButton();
 });
 
-// -------------------------
-// COPY TEMPLATE TEXT BUTTONS
-// -------------------------
-document.querySelectorAll("[data-copy-template]").forEach(button => {
-  button.addEventListener("click", () => {
-    const templateText = button.closest(".template-card").querySelector(".template-text").innerText;
+// -----------------------------
+// FAQ ACCORDIONS
+// -----------------------------
+function initFaqToggles() {
+  const faqItems = document.querySelectorAll(".faq-item");
 
-    navigator.clipboard.writeText(templateText)
-      .then(() => {
-        button.textContent = "Copied!";
-        setTimeout(() => button.textContent = "Copy", 1500);
-      })
-      .catch(err => console.error("Copy failed:", err));
-  });
-});
+  if (!faqItems.length) return;
 
-// -------------------------
-// COPY LOG TEMPLATE BUTTON
-// -------------------------
-document.querySelector("[data-copy-log]")?.addEventListener("click", () => {
+  faqItems.forEach(item => {
+    const question = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+    if (!question || !answer) return;
 
-  // Your default log template content:
-  const logTemplate = `
-Date:
-People:
-Event:
-Impact:
-Follow-up:
-  `.trim();
+    // Basic accessibility attributes
+    const answerId = `faq-answer-${Math.random().toString(36).slice(2)}`;
+    answer.id = answerId;
+    question.setAttribute("aria-controls", answerId);
+    question.setAttribute("aria-expanded", "false");
 
-  navigator.clipboard.writeText(logTemplate)
-    .then(() => {
-      const logBtn = document.querySelector("[data-copy-log]");
-      logBtn.textContent = "Copied!";
-      setTimeout(() => logBtn.textContent = "Copy log template", 1500);
-    })
-    .catch(err => console.error("Copy failed:", err));
-});
-}
+    question.addEventListener("click", () => {
+      const isOpen = answer.classList.contains("open");
 
-// Copy any template <pre> with data-template
-document.querySelectorAll("[data-copy-template]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const container = btn.closest(".template-card");
-    if (!container) return;
-    const pre = container.querySelector("[data-template]");
-    if (!pre) return;
+      // Close all others
+      faqItems.forEach(otherItem => {
+        const otherAnswer = otherItem.querySelector(".faq-answer");
+        const otherQuestion = otherItem.querySelector(".faq-question");
+        if (!otherAnswer || !otherQuestion) return;
 
-    const text = pre.textContent.replace(/\u00a0/g, " "); // non-breaking spaces
-    navigator.clipboard
-      .writeText(text.trim())
-      .then(() => {
-        btn.textContent = "Copied!";
-        setTimeout(() => (btn.textContent = "Copy"), 1500);
-      })
-      .catch(() => {
-        alert("Could not copy. You can still select and copy manually.");
+        otherAnswer.classList.remove("open");
+        otherQuestion.setAttribute("aria-expanded", "false");
       });
-  });
-});
 
-// Simple FAQ toggle
-document.querySelectorAll("[data-faq]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const item = btn.closest(".faq-item");
-    const answer = item?.querySelector(".faq-answer");
-    if (!answer) return;
-    answer.classList.toggle("open");
-  });
-});
-// FAQ toggle functionality
-document.querySelectorAll('[data-faq]').forEach(button => {
-  button.addEventListener('click', () => {
-    const answer = button.nextElementSibling;
-    const isOpen = button.classList.contains('open');
-
-    // Close all open FAQ answers first
-    document.querySelectorAll('[data-faq]').forEach(btn => {
-      btn.classList.remove('open');
-      if (btn.nextElementSibling) {
-        btn.nextElementSibling.style.maxHeight = null;
+      // Toggle this one
+      if (!isOpen) {
+        answer.classList.add("open");
+        question.setAttribute("aria-expanded", "true");
       }
     });
-
-    // Open the clicked one (if it wasn’t already open)
-    if (!isOpen) {
-      button.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    }
   });
-});
+}
 
+// -----------------------------
+// COPY TEMPLATE BUTTONS
+// -----------------------------
+function initTemplateCopyButtons() {
+  const buttons = document.querySelectorAll("[data-copy-template]");
+  if (!buttons.length) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".template-card");
+      const pre = card ? card.querySelector(".template-text") : null;
+      if (!pre) return;
+
+      const text = pre.innerText.trim();
+      copyToClipboard(text, button, {
+        defaultLabel: "Copy",
+        successLabel: "Copied!"
+      });
+    });
+  });
+}
+
+// -----------------------------
+// COPY LOG TEMPLATE BUTTON
+// -----------------------------
+function initLogCopyButton() {
+  const btn = document.querySelector("[data-copy-log]");
+  if (!btn) return;
+
+  const logTemplate = `
+Date:
+Time:
+Location:
+
+People involved / witnesses:
+
+
+What happened (include exact words if you can):
+
+
+Impact on your work / health / opportunities:
+
+
+How you responded or reported it:
+
+Next follow-up step / deadline:
+  `.trim();
+
+  btn.addEventListener("click", () => {
+    copyToClipboard(logTemplate, btn, {
+      defaultLabel: "Copy log template",
+      successLabel: "Copied!"
+    });
+  });
+}
+
+// -----------------------------
+// UTIL: Clipboard helper
+// -----------------------------
+function copyToClipboard(text, button, labels) {
+  if (!navigator.clipboard) {
+    console.error("Clipboard API not available in this browser.");
+    return;
+  }
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      if (!button) return;
+      const original = button.textContent;
+      button.textContent = labels.successLabel || "Copied!";
+      button.disabled = true;
+
+      setTimeout(() => {
+        button.textContent = labels.defaultLabel || original || "Copy";
+        button.disabled = false;
+      }, 1500);
+    })
+    .catch(err => {
+      console.error("Copy failed:", err);
+    });
+}
